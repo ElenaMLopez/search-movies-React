@@ -9,12 +9,16 @@ import { MovieList } from './components/MoviesList';
 
 class App extends Component {
   
-   state = { results: [] }
+   state = { usedSearch: false, results: [] }
 
-  _handleResults = (results) => {
-    console.log('Desde _handleResults: ', results);
-    
-    this.setState({ results })
+  _handleResults = (results) => {    
+    this.setState({ results, usedSearch: true })
+  }
+  
+  _renderResults () {
+    return this.state.results.length === 0 
+      ? <p>Sorry no results! <span role="img" aria-label=''>😳</span></p>
+      : <MovieList movies={this.state.results}/>
   }
 
   render () {
@@ -24,9 +28,9 @@ class App extends Component {
         <div className="Search-Form--wrapper">
           <SearchForm onResults={this._handleResults} />
         </div>
-        {this.state.results.length === 0 
-          ? 'Sin resultados'
-          : <MovieList movies={this.state.results}/>}
+        {this.state.usedSearch 
+          ? this._renderResults() 
+          : <small>Use the form to search</small>}
       </div>
     );
   }
