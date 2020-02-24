@@ -20,7 +20,17 @@ class App extends Component {
   _renderResults () {
     const { results } = this.state
     return results.map(movie => {
-      return <p key={movie.imdbID}>{movie.Title}</p>
+      return (
+        <div key={ movie.imdbID }>
+          {/* <p  >{movie.Title}</p> */}
+          <Movie 
+            title={ movie.Title}
+            year={ movie.Year }
+            poster={movie.Poster}
+          />
+
+        </div>
+    )
     })    
   }
   render () {
@@ -33,7 +43,6 @@ class App extends Component {
         {this.state.results.length === 0 
           ? 'Sin resultados'
           : this._renderResults()}
-        <Movie />
       </div>
     );
   }
