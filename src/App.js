@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Title } from './components/Title';
 import { SearchForm } from './components/SearchForm';
 
+import { Detail } from './pages/Detail'
+
 import './App.css';
 import 'bulma/css/bulma.css'
 import { MovieList } from './components/MoviesList';
@@ -14,7 +16,7 @@ class App extends Component {
   _handleResults = (results) => {    
     this.setState({ results, usedSearch: true })
   }
-  
+
   _renderResults () {
     return this.state.results.length === 0 
       ? <p>Sorry no results! <span role="img" aria-label=''>😳</span></p>
@@ -22,6 +24,13 @@ class App extends Component {
   }
 
   render () {
+    const url = new URL(document.location)
+    const hasId = url.searchParams.has('id')
+
+    if (hasId) {
+      return <Detail />
+    }
+
     return (
       <div className="App">
         <Title>Search Movies</Title>
