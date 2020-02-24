@@ -6,4 +6,18 @@
 .Search-Form--wrapper {
   display: flex;
   justify-content: center;
+  padding: 20px;
+}
+
+/* Movie List */
+
+.Movie-List {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.Movie-List--item {
+  margin-bottom: 24px;
+  width: 48%;
 }
