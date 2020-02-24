@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Title } from './components/Title';
 import { SearchForm } from './components/SearchForm';
-import { Movie } from './components/Movie'
 
 import './App.css';
 import 'bulma/css/bulma.css'
+import { MovieList } from './components/MoviesList';
 
 
 class App extends Component {
@@ -17,22 +17,6 @@ class App extends Component {
     this.setState({ results })
   }
 
-  _renderResults () {
-    const { results } = this.state
-    return results.map(movie => {
-      return (
-        <div key={ movie.imdbID }>
-          {/* <p  >{movie.Title}</p> */}
-          <Movie 
-            title={ movie.Title}
-            year={ movie.Year }
-            poster={movie.Poster}
-          />
-
-        </div>
-    )
-    })    
-  }
   render () {
     return (
       <div className="App">
@@ -42,7 +26,7 @@ class App extends Component {
         </div>
         {this.state.results.length === 0 
           ? 'Sin resultados'
-          : this._renderResults()}
+          : <MovieList movies={this.state.results}/>}
       </div>
     );
   }
